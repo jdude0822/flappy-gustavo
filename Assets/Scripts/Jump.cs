@@ -14,24 +14,33 @@ public class Jump : MonoBehaviour
 	{
 		wingsUp = Resources.Load("Gustavo wings down") as Texture2D;
 		wingsDown = Resources.Load ("Gustavo wings up") as Texture2D;
-		pressed = true;
+		pressed = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+
 		if(Input.touchCount > 0)
 		{
-			if(!pressed)
+			Debug.Log(pressed.ToString() + ": " + Input.touchCount);
+			if(pressed == false)
 			{
 				renderer.material.mainTexture = wingsUp;
 				this.rigidbody.velocity = jump;
 				pressed = true;
 			}
+
+			else
+			{
+				renderer.material.mainTexture = wingsDown;
+				this.rigidbody.AddForce(fall);
+			}
 		}
 
 		else
 		{
+			Debug.Log(pressed.ToString() + ": " + Input.touchCount);
 			pressed = false;
 			renderer.material.mainTexture = wingsDown;
 			this.rigidbody.AddForce(fall);
