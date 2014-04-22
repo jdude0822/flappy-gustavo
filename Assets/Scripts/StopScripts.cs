@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class StopScripts : MonoBehaviour {
 	
 	short gameStarted = 0;
@@ -8,33 +9,39 @@ public class StopScripts : MonoBehaviour {
 	GUIText[] labels = new GUIText[3];
 	int score = 0;
 
+	public GameObject text;
 	public GameObject mainCamera;
 
 	// Use this for initialization
 	void Start () {
-		GameObject n = new GameObject("text" + 0);
-		GameObject o = new GameObject("text" + 1);
-		GameObject p = new GameObject("text" + 1);
+		GameObject n = (GameObject) Instantiate(text);
+		GameObject o = (GameObject) Instantiate(text);
+		GameObject p = (GameObject) Instantiate(text);
 
-		labels[0] = (GUIText)n.AddComponent(typeof(GUIText));
-		labels[1] = (GUIText)o.AddComponent(typeof(GUIText));
-		labels[2] = (GUIText)p.AddComponent(typeof(GUIText));
+		//labels[0] = (GUIText)n.AddComponent(typeof(GUIText));
+		//labels[1] = (GUIText)o.AddComponent(typeof(GUIText));
+		//labels[2] = (GUIText)p.AddComponent(typeof(GUIText));
+
+		labels[0] = n.guiText;
+		labels[1] = o.guiText;
+		labels[2] = p.guiText;
+
 		labels[0].transform.position = new Vector3(.5f, .5f, 0);
-		labels[0].text = "Harness the compiler!";
-		labels[0].fontStyle = FontStyle.Bold;
-		labels[0].anchor = TextAnchor.MiddleCenter;
-		labels[0].color = Color.black;
-		labels[0].fontSize = 16;
-		labels[1].fontStyle = FontStyle.Bold;
-		labels[1].anchor = TextAnchor.MiddleCenter;
-		labels[1].color = Color.black;
+		labels[0].text = "Harness the COMPILER!!";
+		//labels[0].fontStyle = FontStyle.Bold;
+		//labels[0].anchor = TextAnchor.MiddleCenter;
+		//labels[0].color = Color.black;
+		//labels[0].fontSize = 24;
+		//labels[1].fontStyle = FontStyle.Bold;
+		//labels[1].anchor = TextAnchor.MiddleCenter;
+		//labels[1].color = Color.black;
 		labels[1].transform.position = new Vector3(.5f, .42f, 0);
-		labels[1].fontSize = 16;
+		//labels[1].fontSize = 15;
 		labels[2].transform.position = new Vector3(.5f, .34f, 0);
-		labels[2].anchor = TextAnchor.MiddleCenter;
-		labels[2].fontStyle = FontStyle.Bold;
-		labels[2].color = Color.black;
-		labels[2].fontSize = 16;
+		//labels[2].anchor = TextAnchor.MiddleCenter;
+		//labels[2].fontStyle = FontStyle.Bold;
+		//labels[2].color = Color.black;
+		//labels[2].fontSize = 15;
 		//mainCamera = GameObject.Find("MainCamera");
 	}
 	
