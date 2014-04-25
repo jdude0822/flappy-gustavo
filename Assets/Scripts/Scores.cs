@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Scores : MonoBehaviour {
 
-	public GameObject text;
 	string scores;
 
 	// Use this for initialization
