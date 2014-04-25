@@ -4,16 +4,16 @@ using System.Collections;
 public class CreateBlocks : MonoBehaviour {
 
 	//float step;
-	int counter = 0;
+	float counter = 0f;
 	int height = 0;
 	Vector3 start = new Vector3(8, 5, 0);
 
 	public GameObject clone;
-	public int seconds = 5;
+	public float seconds = 5f;
 	
 	// Use this for initialization
 	void Start () {
-		seconds *= 50;
+		seconds *= 50f;
 		counter = seconds;
 	}
 	
@@ -28,7 +28,7 @@ public class CreateBlocks : MonoBehaviour {
 			start.Set(8,(float) height, 0);
 			GameObject newblock = (GameObject) GameObject.Instantiate(clone, start, Quaternion.identity);
 			newblock.GetComponent<MoveBlocks>().enabled = true;
-			counter = 0;
+			counter = 0f;
 		}
 		else{
 			counter++;

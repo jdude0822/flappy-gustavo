@@ -14,7 +14,7 @@ public class MoveBlocks : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.Translate(-4 * Time.deltaTime, 0, 0);
+		this.transform.Translate((float)(-2.5f * Time.deltaTime), 0f, 0f);
 		if(this.transform.position.x < -3){
 			GameObject.Destroy(this.gameObject);
 		}
