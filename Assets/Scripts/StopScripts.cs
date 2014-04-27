@@ -66,6 +66,9 @@ public class StopScripts : MonoBehaviour {
 			score = 0;
 			labels[3].text = "Score: " + score;
 			labels[0].text = "Score: " + score;
+
+			this.gameObject.GetComponent<Jump>().resetJump();
+
 		}
 		else if(gameStarted == 2 && Input.touchCount > 0){
 			isDead = false;

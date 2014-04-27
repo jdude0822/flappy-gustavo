@@ -10,7 +10,7 @@ public class ShowButtons : MonoBehaviour {
 	Rect nameSpace;
 	bool checkedScore = false;
 	string scoreList;
-	string username = "Enter Name";
+	string username = "Enter Name for High-Scores";
 
 	bool pressed = true;
 	bool waiting = false;
@@ -36,7 +36,7 @@ public class ShowButtons : MonoBehaviour {
 					if(!checkedScore && test.position.x >= 10 && test.position.x <= (Screen.width/2)-5){
 						checkedScore = false;
 						player.GetComponent<StopScripts>().setGameStatus(2);
-						if(string.Compare(username, "Enter Name") != 0){
+						if(string.Compare(username, "Enter Name for High-Scores") != 0){
 
 							this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
 						}
@@ -66,17 +66,17 @@ public class ShowButtons : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		GUI.Button(restart, "Recompile");
+		GUI.Button(restart, "Recompile!\n(Restart)");
 
 		if(!checkedScore){
 			GUI.Button(scores, "High-Scores");
-			username = GUI.TextField(nameSpace , username, 20);
+			username = GUI.TextField(nameSpace , username, 30);
 		}
 	}
 
 	IEnumerator WaitToSwitch()
 	{
-		if(string.Compare(username, "Enter Name") != 0){
+		if(string.Compare(username, "Enter Name for High-Scores") != 0){
 			this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
 		}
 		yield return new WaitForSeconds(.2f);

@@ -8,15 +8,16 @@ public class Jump : MonoBehaviour
 	Vector3 fall = new Vector3(0,-40f,0);
 	Vector3 velocity;
 	Rigidbody player;
-	bool pressed, waitActive;
+	bool pressed; 
+	bool waitActive;
 	Texture2D wingsUp;
 	Texture2D wingsDown;
 	// Use this for initialization
 	void Start () 
 	{
 		player = GetComponent<Rigidbody>();
-		wingsUp = Resources.Load("Gustavo wings down") as Texture2D;
-		wingsDown = Resources.Load ("Gustavo wings up") as Texture2D;
+		wingsDown = Resources.Load("Gustavo wings down") as Texture2D;
+		wingsUp = Resources.Load ("Gustavo wings up") as Texture2D;
 		pressed = false;
 		waitActive = false;
 	}
@@ -31,7 +32,7 @@ public class Jump : MonoBehaviour
 			if(pressed == false && waitActive == false)
 			{
 				pressed = true;
-				renderer.material.mainTexture = wingsUp;
+				renderer.material.mainTexture = wingsDown;
 				this.rigidbody.velocity = jump;				
 			}
 
@@ -49,7 +50,7 @@ public class Jump : MonoBehaviour
 		{
 			//Debug.Log(pressed.ToString() + ": " + Input.touchCount);
 			pressed = false;
-			renderer.material.mainTexture = wingsDown;
+			renderer.material.mainTexture = wingsUp;
 
 			if(velocity.y > -15)
 			{
@@ -65,6 +66,12 @@ public class Jump : MonoBehaviour
 		yield return new WaitForSeconds(.1f);
 		Debug.Log ("Done Waiting!");
 		waitActive = false;
+	}
+
+	public void resetJump(){
+		pressed = false;
+		waitActive = false;
+		renderer.material.mainTexture = wingsUp;
 	}
 
 }
