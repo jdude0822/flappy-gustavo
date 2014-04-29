@@ -90,18 +90,12 @@ public class ShowButtons : MonoBehaviour
 
 	IEnumerator WaitToSwitch()
 	{
-		if(string.Compare(username, "Enter Name") != 0)
-		{
-			this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
-		}
-		yield return new WaitForSeconds(.2f);
+		yield return this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
 
-		this.gameObject.GetComponent<Scores>().showData();
-
-		yield return new WaitForSeconds(.2f);
+		yield return this.gameObject.GetComponent<Scores>().showData();
 
 		scoreList = this.gameObject.GetComponent<Scores>().getScores();
-		restart = new Rect(10, Screen.height - 160, Screen.width - 20, 120);
+		restart = new Rect(10, Screen.height * (7f/8), Screen.width - 20, Screen.height * (1f/9));
 		checkedScore = true;
 		player.GetComponent<StopScripts>().displayScores(scoreList);
 	}
