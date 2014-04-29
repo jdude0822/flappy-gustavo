@@ -11,7 +11,7 @@ public class ShowButtons : MonoBehaviour
 	Rect nameSpace;
 	bool checkedScore = false;
 	string scoreList;
-	string username = "Enter Name for High-Scores";
+	string username = "Enter Name";
 	bool pressed = true;
 	bool waiting = false;
 	public GUIStyle buttonStyle, textBoxStyle; 
@@ -19,10 +19,12 @@ public class ShowButtons : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		nameSpace = new Rect(10, 20, Screen.width - 20, 100);
-		restart = new Rect(10, Screen.height - 160,(Screen.width / 2) - 15, 120);
-		scores = new Rect((Screen.width / 2) + 5, Screen.height - 160, (Screen.width / 2) - 15, 120);
+		nameSpace = new Rect(10, Screen.height * (1f/16), Screen.width - 20, Screen.height * (1f/9));
+		restart = new Rect(10, Screen.height * (7f/8),(Screen.width / 2) - 15, Screen.height * (1f/9));
+		scores = new Rect((Screen.width / 2) + 5, Screen.height * (7f/8), (Screen.width / 2) - 15, Screen.height * (1f/9));
 		player = GameObject.Find("Gustavo");
+		buttonStyle.fontSize = (int) (.06944*Screen.width);
+		textBoxStyle.fontSize = (int) (.06944*Screen.width);
 		//this.gameObject.GetComponent<Scores>().clearData();
 		//Debug.Log("x limits: 10 - " + ((Screen.width / 2) - 10) + " and " + ((Screen.width/2) + 10) + " - " + (Screen.width - 5));
 	}
@@ -36,13 +38,13 @@ public class ShowButtons : MonoBehaviour
 				test = Input.GetTouch(0);
 
 				//Debug.Log("pressed pixel: " + test.position.x + ", " + test.position.y);
-				if(test.position.y >= 40 && test.position.y <= 160)
+				if(test.position.y >= Screen.height * (.01389) && test.position.y <= Screen.height * (7f/8))
 				{
 					if(!checkedScore && test.position.x >= 10 && test.position.x <= (Screen.width/2)-5)
 					{
 						checkedScore = false;
 						player.GetComponent<StopScripts>().setGameStatus(2);
-						if(string.Compare(username, "Enter Name for High-Scores") != 0)
+						if(string.Compare(username, "Enter Name") != 0)
 						{
 
 							this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
@@ -54,7 +56,7 @@ public class ShowButtons : MonoBehaviour
 					{
 						checkedScore = false;
 						player.GetComponent<StopScripts>().setGameStatus(2);
-						restart = new Rect(10, Screen.height - 160,(Screen.width / 2) - 15, 120);
+						restart = new Rect(10, Screen.height * (7f/8), (Screen.width / 2) - 15, Screen.height * (1f/9));
 						player.GetComponent<StopScripts>().hideScores();
 						this.gameObject.GetComponent<ShowButtons>().enabled = false;
 					}
@@ -82,13 +84,13 @@ public class ShowButtons : MonoBehaviour
 		if(!checkedScore)
 		{
 			GUI.Button(scores, "High-Scores", buttonStyle);
-			username = GUI.TextField(nameSpace , username, 30, textBoxStyle);
+			username = GUI.TextField(nameSpace , username, 25, textBoxStyle);
 		}
 	}
 
 	IEnumerator WaitToSwitch()
 	{
-		if(string.Compare(username, "Submit Score") != 0)
+		if(string.Compare(username, "Enter Name") != 0)
 		{
 			this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
 		}
