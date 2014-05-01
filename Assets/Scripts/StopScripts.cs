@@ -16,17 +16,21 @@ public class StopScripts : MonoBehaviour {
 	public GameObject text_back;
 	public GameObject mainCamera;
 
+	public GameObject score_text;
+	public GameObject score_text_back;
 
 	// Use this for initialization
 	void Start () {
 		GameObject n = (GameObject) Instantiate(text);
 		GameObject o = (GameObject) Instantiate(text);
 		GameObject p = (GameObject) Instantiate(text);
+		GameObject score_obj = (GameObject) Instantiate(score_text);
 		//GameObject q = (GameObject) Instantiate(text);
 
 		GameObject n_back = (GameObject) Instantiate(text_back);
 		GameObject o_back = (GameObject) Instantiate(text_back);
 		GameObject p_back = (GameObject) Instantiate(text_back);
+		GameObject score_obj_back = (GameObject) Instantiate(score_text_back);
 
 
 		labels[0] = n.guiText;
@@ -38,13 +42,16 @@ public class StopScripts : MonoBehaviour {
 		labels[4] = o_back.guiText;
 		labels[5] = p_back.guiText;
 
+		labels[6] = score_obj.guiText;
+		labels[7] = score_obj_back.guiText;
+
 		labels[3].transform.position = new Vector3(.5f, .5f, 0);
-		labels[3].text = "Harness the COMPILER!!";
+		labels[3].text = "Touch to Compile!";
 		labels[4].transform.position = new Vector3(.5f, .42f, 0);
 		labels[5].transform.position = new Vector3(.5f, .7f, 0);
 
 		labels[0].transform.position = new Vector3(.5f, .5f, 0);
-		labels[0].text = "Harness the COMPILER!!";
+		labels[0].text = "Touch to Compile!";
 		labels[1].transform.position = new Vector3(.5f, .42f, 0);
 		labels[2].transform.position = new Vector3(.5f, .7f, 0);
 
@@ -61,11 +68,16 @@ public class StopScripts : MonoBehaviour {
 			this.gameObject.GetComponent<Jump>().enabled = true;
 			this.rigidbody.constraints &= ~RigidbodyConstraints.FreezePositionY;
 			mainCamera.GetComponent<CreateBlocks>().enabled = true;
-			labels[3].transform.position = new Vector3(.5f, .15f, 0);
-			labels[0].transform.position = new Vector3(.5f, .15f, 0);
+			//labels[3].transform.position = new Vector3(.5f, .15f, 0);
+			//labels[0].transform.position = new Vector3(.5f, .15f, 0);
+			labels[7].transform.position = new Vector3(.5f, .8f, 0);
+			labels[6].transform.position = new Vector3(.5f, .8f, 0);
 			score = 0;
-			labels[3].text = "Score: " + score;
-			labels[0].text = "Score: " + score;
+			labels[3].text = "";
+			labels[0].text = "";
+			labels[7].text = "" + score;
+			labels[6].text = "" + score;
+
 
 			this.gameObject.GetComponent<Jump>().resetJump();
 
@@ -81,11 +93,14 @@ public class StopScripts : MonoBehaviour {
 				}
 			}
 
-			labels[3].text = "Harness the COMPILER!";
+			labels[3].text = "Touch to Compile!";
 			labels[4].text = "";
 
-			labels[0].text = "Harness the COMPILER!";
+			labels[0].text = "Touch to Compile!";
 			labels[1].text = "";
+
+			labels[7].text = "";
+			labels[6].text = "";
 			//labels[2].text = "";
 			StartCoroutine(restartWait2());
 		}
@@ -114,12 +129,15 @@ public class StopScripts : MonoBehaviour {
 		mainCamera.GetComponent<CreateBlocks>().enabled = false;
 
 		labels[3].transform.position = new Vector3(.5f, .5f, 0);
-		labels[3].text = "Compilation over!";
+		labels[3].text = "Compilation Over!";
 		labels[4].text = "Score = " + score;
 
 		labels[0].transform.position = new Vector3(.5f, .5f, 0);
-		labels[0].text = "Compilation over!";
+		labels[0].text = "Compilation Over!";
 		labels[1].text = "Score = " + score;
+
+		labels[7].text = "";
+		labels[6].text = "";
 		//mainCamera.GetComponent<Scores>().addUser("Gustavo", score);
 
 		//StartCoroutine(restartWait());
@@ -145,8 +163,8 @@ public class StopScripts : MonoBehaviour {
 
 	public void incrementScore(){
 		score++;
-		labels[3].text = "Score: " + score;
-		labels[0].text = "Score: " + score;
+		labels[7].text = "" + score;
+		labels[6].text = "" + score;
 	}
 	
 	/**
@@ -161,13 +179,16 @@ public class StopScripts : MonoBehaviour {
 	}
 
 	public void displayScores(string scores){
+		labels[7].text = "";
+		labels[6].text = "";
+
 		labels[3].text = "";
 		labels[4].text = "";
 		labels[5].text = scores;
 		
 		labels[0].text = "";
 		labels[1].text = "";
-		labels[2].text = scores;
+		labels[2].text = scores;		
 	}
 
 	public void hideScores(){

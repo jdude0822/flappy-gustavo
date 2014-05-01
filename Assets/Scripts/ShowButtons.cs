@@ -84,15 +84,18 @@ public class ShowButtons : MonoBehaviour
 		if(!checkedScore)
 		{
 			GUI.Button(scores, "High-Scores", buttonStyle);
-			username = GUI.TextField(nameSpace , username, 25, textBoxStyle);
+			username = GUI.TextField(nameSpace , username, 10, textBoxStyle);
 		}
 	}
 
 	IEnumerator WaitToSwitch()
 	{
-		yield return this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
+		//yield return this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
 
-		yield return this.gameObject.GetComponent<Scores>().showData();
+		//yield return this.gameObject.GetComponent<Scores>().showData();
+
+		yield return new WaitForSeconds (.2f);
+		this.gameObject.GetComponent<Scores>().showData();
 
 		scoreList = this.gameObject.GetComponent<Scores>().getScores();
 		restart = new Rect(10, Screen.height * (7f/8), Screen.width - 20, Screen.height * (1f/9));
