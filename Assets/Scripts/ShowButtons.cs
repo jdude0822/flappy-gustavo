@@ -23,8 +23,8 @@ public class ShowButtons : MonoBehaviour
 		restart = new Rect(10, Screen.height * (7f/8),(Screen.width / 2) - 15, Screen.height * (1f/9));
 		scores = new Rect((Screen.width / 2) + 5, Screen.height * (7f/8), (Screen.width / 2) - 15, Screen.height * (1f/9));
 		player = GameObject.Find("Gustavo");
-		buttonStyle.fontSize = (int) (.06944*Screen.width);
-		textBoxStyle.fontSize = (int) (.06944*Screen.width);
+		buttonStyle.fontSize = (int) (.053*Screen.width);
+		textBoxStyle.fontSize = (int) (.1*Screen.width);
 		//this.gameObject.GetComponent<Scores>().clearData();
 		//Debug.Log("x limits: 10 - " + ((Screen.width / 2) - 10) + " and " + ((Screen.width/2) + 10) + " - " + (Screen.width - 5));
 	}
