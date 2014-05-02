@@ -69,12 +69,12 @@ public class StopScripts : MonoBehaviour {
 		labels[3].transform.position = new Vector3(.5f, .16f, 0);
 		labels[3].text = "Touch to\nCompile!";
 		//labels[4].transform.position = new Vector3(.5f, .37f, 0);
-		labels[5].transform.position = new Vector3(.5f, .65f, 0);
+		labels[5].transform.position = new Vector3(.5f, .5f, 0);
 
 		labels[0].transform.position = new Vector3(.5f, .16f, 0);
 		labels[0].text = "Touch to\nCompile!";
 		//labels[1].transform.position = new Vector3(.5f, .37f, 0);
-		labels[2].transform.position = new Vector3(.5f, .65f, 0);
+		labels[2].transform.position = new Vector3(.5f, .5f, 0);
 
 		labels[11].transform.position = new Vector3(.5f, .39f, 0);
 		labels[10].transform.position = new Vector3(.5f, .39f, 0);
