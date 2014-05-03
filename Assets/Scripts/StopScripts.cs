@@ -113,6 +113,7 @@ public class StopScripts : MonoBehaviour {
 
 		}
 		else if(gameStarted == 2 && Input.touchCount > 0){
+			this.gameObject.GetComponent<Jump>().resetJump();
 			isDead = false;
 			this.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 			this.transform.position = new Vector3(.4f, 3.5f, 0);
