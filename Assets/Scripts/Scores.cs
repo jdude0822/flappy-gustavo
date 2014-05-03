@@ -2,37 +2,30 @@
 using System.Collections;
 
 public class Scores : MonoBehaviour {
-
-	string scores;
-
+	
 	// Use this for initialization
 	void Start () {
 
 	}
-	
-	// Update is called once per frame
-	/*void Update () {
-	
-	}*/
 
-	public void showData(){
+	/**
+	 * Returns the www object, use a coroutine to wait for it to return before using.
+	 */
+	public WWW showData(){
 		string url = "http://data.cs.purdue.edu:1460/Sql/score.cgi";
 		
 		WWWForm form = new WWWForm();
 		form.AddField("a", "get");
-		//form.AddField("var2", "value2");
 		WWW www = new WWW(url, form);
-		
-		StartCoroutine(WaitForRequestShow(www));
 
-		//return scores;
+		return www;
+		//StartCoroutine(WaitForRequestShow(www));
 	}
 
-	public string getScores(){
-		return scores;
-	}
-
-	public void addUser(string user, int score){
+	/**
+	 * Returns the www object, use a coroutine to wait for it to return before using.
+	 */
+	public WWW addUser(string user, int score){
 		string url = "http://data.cs.purdue.edu:1460/Sql/score.cgi";
 		
 		WWWForm form = new WWWForm();
@@ -40,8 +33,9 @@ public class Scores : MonoBehaviour {
 		form.AddField("u", user);
 		form.AddField("s", score);
 		WWW www = new WWW(url, form);
-		
-		StartCoroutine(WaitForRequestAdd(www));
+
+		return www;
+		//StartCoroutine(WaitForRequestAdd(www));
 	}
 
 	public void clearData(){
@@ -73,7 +67,6 @@ public class Scores : MonoBehaviour {
 		// check for errors
 		if (www.error == null) {
 			Debug.Log("Show Ok!: " + www.text);
-			scores = www.text;
 		}
 		else {
 			Debug.Log("Show Error: "+ www.error);
