@@ -170,7 +170,7 @@ public class StopScripts : MonoBehaviour {
 	void OnCollisionEnter(Collision col){
 		if(!isDead){
 			stoppedTouching = false;
-			audio.PlayOneShot (deathsound);
+			audio.PlayOneShot (deathsound, .65f);
 			dark.renderer.enabled = true;
 			isDead = true;
 			this.rigidbody.velocity = stop;
