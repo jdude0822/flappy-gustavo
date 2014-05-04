@@ -158,7 +158,7 @@ public class StopScripts : MonoBehaviour {
 			StartCoroutine(restartWait2());
 		}
 		else if(gameStarted == 0 && Input.touchCount == 0 && !stoppedTouching){
-			Debug.Log("let go");
+			//Debug.Log("let go");
 			stoppedTouching = true;
 		}
 
