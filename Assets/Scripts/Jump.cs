@@ -12,6 +12,7 @@ public class Jump : MonoBehaviour
 	bool waitActive;
 	Texture2D wingsUp;
 	Texture2D wingsDown;
+	public AudioClip flap;
 	// Use this for initialization
 	void Start () 
 	{
@@ -31,9 +32,10 @@ public class Jump : MonoBehaviour
 			//Debug.Log(pressed.ToString() + ": " + Input.touchCount);
 			if(pressed == false && waitActive == false)
 			{
+				audio.PlayOneShot (flap);
 				pressed = true;
 				renderer.material.mainTexture = wingsDown;
-				this.rigidbody.velocity = jump;				
+				this.rigidbody.velocity = jump;		
 			}
 
 			else
@@ -62,9 +64,9 @@ public class Jump : MonoBehaviour
 	IEnumerator Wait()
 	{
 		waitActive = true;
-		Debug.Log ("waiting...");
+		//Debug.Log ("waiting...");
 		yield return new WaitForSeconds(.1f);
-		Debug.Log ("Done Waiting!");
+		//Debug.Log ("Done Waiting!");
 		waitActive = false;
 	}
 

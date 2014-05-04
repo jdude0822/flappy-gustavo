@@ -8,9 +8,11 @@ public class StopScripts : MonoBehaviour {
 	Vector3 stop = new Vector3 (0, 0, 0);
 	int gameStarted = 0;
 	Object[] blocks;
-	GUIText[] labels = new GUIText[12];
+	GUIText[] labels = new GUIText[13];
 	int score = 0;
 	bool isDead;
+	public AudioClip scoresound;
+	public AudioClip deathsound;
 
 	public GameObject text;
 	public GameObject text_back;
@@ -24,9 +26,15 @@ public class StopScripts : MonoBehaviour {
 	public GameObject final_score_text_back;
 	public GameObject high_text;
 	public GameObject high_text_back;
+	public GameObject dark_background;
+	GameObject dark;
+
 
 	// Use this for initialization
 	void Start () {
+		dark = (GameObject)Instantiate (dark_background);
+		dark.renderer.enabled = false;
+
 		GameObject n = (GameObject) Instantiate(text);
 		//GameObject o = (GameObject) Instantiate(text);
 		GameObject p = (GameObject) Instantiate(high_text);
@@ -41,7 +49,7 @@ public class StopScripts : MonoBehaviour {
 		GameObject score_obj_back = (GameObject) Instantiate(score_text_back);
 		GameObject title_obj_back = (GameObject) Instantiate(title_text_back);
 		GameObject final_score_back_obj = (GameObject) Instantiate(final_score_text_back);
-
+		
 
 		labels[0] = n.guiText;
 		//labels[1] = o.guiText;
@@ -60,6 +68,7 @@ public class StopScripts : MonoBehaviour {
 
 		labels[10] = final_score_obj.guiText;
 		labels[11] = final_score_back_obj.guiText;
+		
 
 		labels[9].transform.position = new Vector3(.5f, .7f, 0);
 		labels[9].text = "Flappy\nGustavo";
@@ -113,6 +122,7 @@ public class StopScripts : MonoBehaviour {
 
 		}
 		else if(gameStarted == 2 && Input.touchCount > 0){
+			dark.renderer.enabled = false;
 			this.gameObject.GetComponent<Jump>().resetJump();
 			isDead = false;
 			this.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -154,6 +164,8 @@ public class StopScripts : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		if(!isDead){
+			audio.PlayOneShot (deathsound);
+			dark.renderer.enabled = true;
 			isDead = true;
 			this.rigidbody.velocity = stop;
 			this.transform.Rotate (Vector3.up * 180);
@@ -207,6 +219,7 @@ public class StopScripts : MonoBehaviour {
 	}
 
 	public void incrementScore(){
+		audio.PlayOneShot (scoresound, .25f);
 		score++;
 		labels[7].text = "" + score;
 		labels[6].text = "" + score;
