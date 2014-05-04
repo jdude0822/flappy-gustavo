@@ -11,7 +11,7 @@ public class ShowButtons : MonoBehaviour
 	Rect nameSpace;
 	bool checkedScore = false;
 	string scoreList;
-	string username = "Enter Name";
+	string username;
 	bool pressed = true;
 	public GUIStyle buttonStyle, textBoxStyle; 
 
@@ -26,7 +26,7 @@ public class ShowButtons : MonoBehaviour
 		player = GameObject.Find("Gustavo");
 		buttonStyle.fontSize = (int) (.053*Screen.width);
 		textBoxStyle.fontSize = (int) (.1*Screen.width);
-		//username = PlayerPrefs.GetString("PlayerName", "Enter Name");
+		username = PlayerPrefs.GetString("PlayerName", "Enter Name");
 		//this.gameObject.GetComponent<Scores>().clearData();
 		//Debug.Log("x limits: 10 - " + ((Screen.width / 2) - 10) + " and " + ((Screen.width/2) + 10) + " - " + (Screen.width - 5));
 	}
@@ -50,7 +50,7 @@ public class ShowButtons : MonoBehaviour
 						player.GetComponent<StopScripts>().setGameStatus(2);
 						if(string.Compare(username, "Enter Name") != 0)
 						{
-							//PlayerPrefs.SetString("PlayerName", username);
+							PlayerPrefs.SetString("PlayerName", username);
 							this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
 						}
 						sending = false;
@@ -96,6 +96,7 @@ public class ShowButtons : MonoBehaviour
 	{
 		WWW info;
 		if(string.Compare(username, "Enter Name") != 0){
+			PlayerPrefs.SetString("PlayerName", username);
 			info = this.gameObject.GetComponent<Scores>().addUser(username, player.GetComponent<StopScripts>().getScore());
 			yield return info;
 		}
