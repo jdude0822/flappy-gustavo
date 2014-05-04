@@ -11,6 +11,7 @@ public class StopScripts : MonoBehaviour {
 	GUIText[] labels = new GUIText[13];
 	int score = 0;
 	bool isDead;
+	bool stoppedTouching = true;
 	public AudioClip scoresound;
 	public AudioClip deathsound;
 
@@ -94,7 +95,7 @@ public class StopScripts : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(gameStarted == 0 && Input.touchCount > 0){
+		if(gameStarted == 0 && Input.touchCount > 0 && stoppedTouching){
 			gameStarted = 1;
 			isDead = false;
 			this.rigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -156,6 +157,10 @@ public class StopScripts : MonoBehaviour {
 			labels[10].text = "";
 			StartCoroutine(restartWait2());
 		}
+		else if(gameStarted == 0 && Input.touchCount == 0 && !stoppedTouching){
+			Debug.Log("let go");
+			stoppedTouching = true;
+		}
 
 		if(isDead){
 			this.rigidbody.AddForce(fall);
@@ -164,6 +169,7 @@ public class StopScripts : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 		if(!isDead){
+			stoppedTouching = false;
 			audio.PlayOneShot (deathsound);
 			dark.renderer.enabled = true;
 			isDead = true;
